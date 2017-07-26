@@ -1,0 +1,16 @@
+FROM rwightman/pytorch:v0.1.12
+
+RUN conda install --name pytorch-py35 -c pandas scikit-image scikit-learn jupyter
+
+RUN mkdir /workspace/notebook
+
+COPY jupyter_notebook_config.py /root/.jupyter/
+
+COPY entrypoint.sh /
+
+COPY run_jupyter.sh /
+
+ENTRYPOINT ["/entrypoint.sh"]
+
+CMD ["/run_jupyter.sh", "--allow-root"]
+
