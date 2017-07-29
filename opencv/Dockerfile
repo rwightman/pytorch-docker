@@ -19,12 +19,12 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     libtbb-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# TODO: building with cuda causes several compile failures
 RUN git clone --branch 3.2.0 --depth 1 https://github.com/opencv/opencv.git /workspace/opencv && \
     cd /workspace/opencv && \
     mkdir build && \
     cd build && \
-    cmake -DWITH_OPENGL=ON -DWITH_TBB=ON -DWITH_CUDA=OFF \
+    cmake -D CMAKE_BUILD_TYPE=RELEASE -DWITH_OPENGL=ON -DWITH_TBB=ON -DWITH_CUDA=OFF \
+    -D BUILD_EXAMPLES=OFF -D BUILD_PERF_TESTS=OFF -D BUILD_TESTS=OFF \
     -D CMAKE_INSTALL_PREFIX=$(python -c "import sys; print(sys.prefix)") \
     -D PYTHON3_EXECUTABLE=$(which python3) \
     -D PYTHON_INCLUDE_DIR=$(python -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") \
@@ -34,7 +34,6 @@ RUN git clone --branch 3.2.0 --depth 1 https://github.com/opencv/opencv.git /wor
     .. && \
     make -j"$(nproc)"  && \
     make install && \
-    sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf' && \
     ldconfig && \
     cd /workspace && \
     rm -rf /workspace/opencv
