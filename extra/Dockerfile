@@ -1,6 +1,6 @@
 FROM rwightman/pytorch:latest
 
-RUN conda install --name pytorch-py35 -c pandas scikit-image scikit-learn jupyter
+RUN conda install --name pytorch-py35 pandas scikit-image scikit-learn jupyter
 
 RUN mkdir /workspace/notebook
 
