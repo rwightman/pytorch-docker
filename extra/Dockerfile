@@ -8,7 +8,7 @@ RUN git clone https://github.com/pytorch/vision.git && cd vision && pip install 
 
 WORKDIR /workspace
 
-RUN conda install --name pytorch-py35 -c pandas scikit-image scikit-learn jupyter
+RUN conda install --name pytorch-py35 pandas scikit-image scikit-learn jupyter
 
 RUN mkdir /workspace/notebook
 
