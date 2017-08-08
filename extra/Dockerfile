@@ -1,4 +1,4 @@
-FROM rwightman/pytorch:latest
+FROM rwightman/pytorch:v0.2.0
 
 RUN conda install --name pytorch-py35 pandas scikit-image scikit-learn jupyter
 

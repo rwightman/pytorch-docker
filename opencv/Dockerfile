@@ -1,4 +1,4 @@
-FROM rwightman/pytorch-extra:latest
+FROM rwightman/pytorch-extra:v0.2.0
 
 ENV PATH /opt/conda/envs/pytorch-py35/bin:$PATH
 
